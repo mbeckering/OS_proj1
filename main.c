@@ -6,8 +6,6 @@
  * Created on January 31, 2018, 9:15 AM
  */
 
-//test edit 1
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -39,7 +37,7 @@ int main(int argc, char *argv[]) {
     }
     
     fprintf(stderr, "I am process %ld, my parent is %ld\n",
-            (long)getpid(), (long)getpid());
+            (long)getpid(), (long)getppid());
 
     return 0;
 }

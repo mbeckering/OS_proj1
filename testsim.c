@@ -6,29 +6,31 @@
  * Created on February 6, 2018, 10:28 AM
  */
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/wait.h>
 
 int main(int argc, char *argv[]) {
-    int pr_limit = 0;
+    int pr_limit = atoi(argv[1]);
     int pr_count = 0;
-    pr_limit = atoi(argv[1]);
+    int i = 0;
+    pid_t childpid = 0;
     
-    fprintf("running testsim and pr_limit = %d\n", pr_limit);
+    printf("RUNNING TESTSIM\n");
+    printf("pr_limit = ");
+    printf("%d\n", pr_limit);
     
-    /*
-        n = atoi(argv[1]);
 
-        for (i=1; i<n; i++) {
+        for (i=1; i<pr_limit; i++) {
             if ( (childpid = fork()) <= 0 )
                 break;
         }
     
         fprintf(stderr, "i:%d process ID:%ld parent ID:%ld child ID:%ld\n",
                 i, (long)getpid(), (long)getppid, (long)childpid);
-        */
+        
     
     return 0;
 }
-

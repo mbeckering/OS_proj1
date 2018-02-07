@@ -9,28 +9,16 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
 
 int main(int argc, char *argv[]) {
-    int pr_limit = atoi(argv[1]);
-    int pr_count = 0;
+    int sleep_time = atoi(argv[1]);
+    int repeat_factor = atoi(argv[2]);
     int i = 0;
-    pid_t childpid = 0;
+    pid_t mypid = 0;
     
     printf("RUNNING TESTSIM\n");
-    printf("pr_limit = ");
-    printf("%d\n", pr_limit);
-    
-
-        for (i=1; i<pr_limit; i++) {
-            if ( (childpid = fork()) <= 0 )
-                break;
-        }
-    
-        fprintf(stderr, "i:%d process ID:%ld parent ID:%ld child ID:%ld\n",
-                i, (long)getpid(), (long)getppid, (long)childpid);
-        
+    printf("sleep_time = %d\n", sleep_time);
+    printf("repeat_factor = %d\n", repeat_factor);
     
     return 0;
 }

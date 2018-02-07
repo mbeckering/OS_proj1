@@ -8,12 +8,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
-
-//simple function to print proc_fan usage
-void print_usage() {
-    printf("Usage: proc_fan -n <# of processes>\n");
-}
 
 int main(int argc, char *argv[]) {
     //initialize variables
@@ -41,30 +37,35 @@ int main(int argc, char *argv[]) {
         
         //if only -h is selected, print usage
         if ( (hflag == 1) && (nflag ==0) ) {
-            print_usage();
+            printf("Usage: %s -n <# of processes>\n", argv[0]);
             return 0;
         }
         
         //if only -n is selected, proceed with -n arg...
         else if ( (nflag == 1) && (hflag == 0) ) {
-            if ( argv[2] != NULL && ( n = atoi(argv[2]) != 0) ) { //...as long as a nonzero int was entered
+            if ( argv[2] != NULL && ( (n = atoi(argv[2])) != 0) ) { //...as long as a nonzero int was entered
             printf("calling testsim with arg %d\n", n);
-            //ENTER TESTSIM CALL HERE********************
+            char command[20];
+            strcpy(command, "./testsim ");
+            strcat(command, argv[2]);
+            //printf("command string = %s\n", command);
+            system(command);
+            printf("EXIT proc_fan\n");
             return 0;
             }
             //exit with error if there was no -n arg
-            else printf("proc_fan: Error: -n requires an integer argument\n");
-            print_usage();
+            else { 
+                printf("%s: Error: -n requires an integer argument\n", argv[0]);
+                printf("Usage: %s -n <# of processes>\n", argv[0]);
+            }
         }
         
         //Otherwise, exit with error message 
         else {
-            printf("proc_fan: Error: invalid option selection\n");
-            print_usage();
+            printf("%s: Error: invalid option selection\n", argv[0]);
+            printf("Usage: %s -n <# of processes>\n", argv[0]);
             return 0;
         }
 
     return 0;
 }
-
-
